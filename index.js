@@ -1,9 +1,8 @@
 var util = require('./util.js'),
     zendesk = require('node-zendesk');
-
 var pickInputs = {
         'subject': { key: 'ticket.subject', validate: { req: true }},
-        'comment': 'ticket.comment.body'
+        'comment': { key: 'ticket.comment.body', validate: { req: true }},
     },
     pickOutputs = {
         id: 'id',
@@ -36,7 +35,7 @@ module.exports = {
 
         if (validateErrors)
             return this.fail(validateErrors);
-        
+
         var client = zendesk.createClient({
             username:  username,
             token:     token,
